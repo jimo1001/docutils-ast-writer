@@ -8,18 +8,18 @@ import rst2ast as this
 setup(
     name='docutils-ast-writer',
     description='AST Writer for docutils',
-    version=this.__version__,
-    author=this.__author__,
-    author_email=this.__author_email__,
-    license=this.__license__,
-    url='https://github.com/iij/docutils-ast-writer',
+    version='0.1.0',
+    author='jimo1001',
+    author_email='jimo1001@gmail.com',
+    license='MIT',
+    url='https://github.com/jimo1001/docutils-ast-writer',
     packages=find_packages(),
     zip_safe=False,
     install_requires=[
-        'docutils'
+        'docutils>=0.12'
     ],
     entry_points="""
         [console_scripts]
-        rst2ast = rst2ast:main
+        rst2ast = rst2ast.cmd:run
     """
 )
