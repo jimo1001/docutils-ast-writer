@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import writer
+from . import writer
 from docutils.core import default_description, publish_cmdline
 
 def run():

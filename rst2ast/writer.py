@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from docutils import writers, nodes
-import json
+
+try:
+    import simplejson as json
+except ImportError as e:
+    import json
 
 __docformat__ = 'reStructuredText'
 
@@ -38,20 +42,25 @@ class ASTTranslator(nodes.GenericNodeVisitor):
             return None, None
         result = {}
         # Line Start
-        if not node.line:
-            node.line = line
-        else:
+        if node.line:
             line = node.line
         # Attributes
         for k, v in node.__dict__.items():
-            if not k.startswith('__') and isinstance(v, (str, unicode, int, long, float, bool)):
-                result[k] = v
+            try:
+                if not k.startswith('__') and isinstance(v, (str, int, float, bool, unicode, long,)):
+                    result[k] = v
+            except NameError as e:
+                pass
         # Tag Name (type)
         if 'tagname' not in result:
-            result['tagname'] = None
+            result['tagname'] = 'text'
         # Text
-        if isinstance(node, (nodes.Element, nodes.Text)):
+        if isinstance(node, (nodes.Text,)):
             result['text'] = node.astext()
+        # line.start
+        result['line'] = {
+            'start': line
+        }
         # Children
         children = getattr(node, 'children', [])
         if len(children) > 0:
@@ -64,10 +73,7 @@ class ASTTranslator(nodes.GenericNodeVisitor):
                 if line < _line:
                     line = _line
         # Line End
-        result['line'] = {
-            'start': node.line,
-            'end': line,
-        }
+        result['line']['end'] = line
         return result, line
 
     # GenericNodeVisitor methods
