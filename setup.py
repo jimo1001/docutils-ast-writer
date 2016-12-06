@@ -18,5 +18,6 @@ setup(
     entry_points="""
         [console_scripts]
         rst2ast = rst2ast.cmd:run
-    """
+    """,
+    use_2to3 = True
 )
