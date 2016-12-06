@@ -8,3 +8,4 @@ include
 lib
 .Python
 pip-selfcheck.json
+.python-version

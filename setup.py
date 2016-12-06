@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='docutils-ast-writer',
     description='AST Writer for docutils',
-    version='0.1.1',
+    version='0.1.2',
     author='jimo1001',
     author_email='jimo1001@gmail.com',
     license='MIT',
