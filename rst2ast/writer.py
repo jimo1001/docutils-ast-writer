@@ -47,7 +47,7 @@ class ASTTranslator(nodes.GenericNodeVisitor):
         # Attributes
         for k, v in node.__dict__.items():
             try:
-                if not k.startswith('__') and isinstance(v, (str, int, float, bool, unicode, long,)):
+                if not k.startswith('__') and isinstance(v, (str, int, float, bool,)):
                     result[k] = v
             except NameError as e:
                 pass
